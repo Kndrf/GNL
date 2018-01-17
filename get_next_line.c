@@ -6,7 +6,7 @@
 /*   By: robihaap <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/20 13:53:36 by robihaap     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/04 11:49:17 by robihaap    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/14 15:40:15 by robihaap    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,20 +15,20 @@
 
 int			gnl_reader(int fd, char **result)
 {
-	char		*backup;
+	char		*tmp;
 	char		buf[BUFF_SIZE + 1];
 	int			ret;
 
 	ret = 1;
 	while (ft_stroccur(*result, '\n') == -1 && ret)
 	{
-		backup = *result;
+		tmp = *result;
 		ret = read(fd, buf, BUFF_SIZE);
 		if (ret == -1)
 			return (-1);
 		buf[ret] = '\0';
-		*result = ft_strjoin(backup, buf);
-		ft_strdel((char **)&backup);
+		*result = ft_strjoin(tmp, buf);
+		ft_strdel((char **)&tmp);
 	}
 	if (ret == 0 && *result[0] == 0)
 	{

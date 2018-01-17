@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strchri.c                                     .::    .:/ .      .::   */
+/*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: robihaap <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/27 16:36:09 by robihaap     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/04 14:22:25 by robihaap    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/01/03 14:06:48 by robihaap     #+#   ##    ##    #+#       */
+/*   Updated: 2018/01/17 13:40:42 by robihaap    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "get_next_line.h"
 
-int			ft_stroccur(const char *s, char c)
+/*
+ * compile with
+ * gcc -Wall -Wextra -Werror get_next_line.c libft/libft.a main.c
+ */
+int		main(int ac, char **av)
 {
-	unsigned char		*ps;
-	int					i;
+	int			fd;
+	int			ret;
+	char		*line;
 
-	i = 0;
-	ps = (unsigned char *)s;
-	while (ps[i])
+	if (ac == 2)
 	{
-		if (ps[i] == c)
-			return (i);
-		i++;
+		fd = open(av[1], O_RDONLY);
+		while ((ret = get_next_line(fd, &line)) > 0)
+			ft_putendl(line);
 	}
-	return (-1);
+	return (0);
 }
